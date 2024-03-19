@@ -1,0 +1,67 @@
+body {
+    background-color: #927df1;
+
+    display: flex;
+    /* align-items centers vertically */
+    align-items: center;
+
+    /* justify-content centers horizontally */
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.arrow-left {
+    height: 150px;
+    cursor: pointer;
+    transform: rotate(180deg);
+}
+
+.arrow-right {
+    height: 150px;
+    cursor: pointer;
+}
+
+.frame {
+    width: 800px;
+    height: 500px;
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    /* this gives animation effect to any movements on the page */
+    transition: all 1s ease;
+}
+
+.image {
+    width: 800px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.button {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid white;
+    cursor: pointer;
+}
