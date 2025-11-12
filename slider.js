@@ -1,66 +1,60 @@
-const left = document.querySelector('.arrow-left');
-const right = document.querySelector('.arrow-right');
-const slider = document.querySelector('.slider');
-const images = document.querySelectorAll('.image');
-const bottom = document.querySelector('.bottom');
-let lastPosition = 0;
-let len = images.length;
+const leftArrow = document.querySelector(".left");
+const rightArrow = document.querySelector(".right");
+const slider = document.querySelector(".slider");
+const numOfImages = document.querySelectorAll(".image").length;
+const bottom = document.querySelector(".bottom");
+let index = 0;
 
-for (let i = 0; i < len; i++) {
-    const div = document.createElement("div");
-    div.className = "button";
-    bottom.appendChild(div);
+rightArrow.addEventListener("click", () => {
+    if (index === numOfImages - 1) {
+      index = 0;
+      moveSlide(index);
+    } else {
+      index++;
+      moveSlide(index);
+    }
+    
+    resetBGColor();
+})
+
+leftArrow.addEventListener("click", () => {
+    if (index === 0) {
+      index = numOfImages - 1;
+      moveSlide(index);
+    } else {
+      index--;
+      moveSlide(index);
+    }
+
+    resetBGColor();
+})
+
+for (let i = 0; i < numOfImages; i++) {
+    const buttonDiv = document.createElement("div");
+    buttonDiv.className = "button";
+    buttonDiv.addEventListener("click", () => goToImage(i));
+    i === 0 && buttonDiv.classList.add("current-button");               // Setting default white background color to the first button
+    bottom.append(buttonDiv);
 }
 
-const buttons = document.querySelectorAll(".button");
-buttons[0].style.backgroundColor = "white";
+const buttons = document.querySelectorAll(".button");                   // Querying 'buttons' after creation in the 'for' loop above
 
-const resetBG = () => {
-    buttons.forEach(button =>{
-        button.style.backgroundColor = "transparent";
+function moveSlide(slideNumber) {
+    slider.style.transform = `translateX(-${slideNumber * 800}px)`;     // By default, transformation point is at 0 (px)
+}
+
+function goToImage(position) {
+    moveSlide(position);
+    index = position;
+    resetBGColor();
+}
+
+function resetBGColor() {
+    buttons.forEach((btn, i) => {
+        if (i === index) {
+            btn.style.backgroundColor = "white";
+        } else {
+            btn.style.backgroundColor = "transparent";
+        }
     })
-};
-
-buttons.forEach((button, i) => {
-    button.addEventListener("click", () => {
-        resetBG()
-        slider.style.transform = `translateX(-${i * 800}px)`;
-        button.style.backgroundColor = "white";
-        lastPosition = i * 800;
-    });
-});
-
-const getNext = () => {
-    slider.style.transform = `translateX(-${lastPosition + 800}px)`;
-    lastPosition += 800;
-};
-
-const getFirst = () => {
-    lastPosition = 0;
-    slider.style.transform = `translateX(0px)`;
-};
-
-const getPrev = () => {
-    slider.style.transform = `translateX(-${lastPosition - 800}px)`;
-    lastPosition -= 800;
-};
-
-const getLast = () => {
-    lastPosition = 2400;
-    slider.style.transform = `translateX(-${lastPosition}px)`;
-};
-
-const setButtonColor = () => {
-    resetBG();
-    buttons[lastPosition / 800].style.backgroundColor = "white";
-};
-
-right.addEventListener('click', () => {
-    (lastPosition < (len - 1) * 800)? getNext(): getFirst();
-    setButtonColor();
-});
-
-left.addEventListener('click', () => {
-    lastPosition > 0? getPrev(): getLast();
-    setButtonColor();
-});
+}

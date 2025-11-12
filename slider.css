@@ -1,67 +1,70 @@
 body {
     background-color: #927df1;
-
     display: flex;
-    /* align-items centers vertically */
-    align-items: center;
-
-    /* justify-content centers horizontally */
     justify-content: center;
+    align-items: center;
 }
 
 .container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 50px;
 }
 
 .top {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 50px;
 }
 
-.arrow-left {
+.arrow {
     height: 150px;
     cursor: pointer;
+}
+
+/* This setting also works
+.arrow.right {
+    rotate: 180deg;
+}
+*/
+
+.right {
     transform: rotate(180deg);
 }
 
-.arrow-right {
-    height: 150px;
-    cursor: pointer;
-}
-
 .frame {
-    width: 800px;
     height: 500px;
+    width: 800px;
     overflow: hidden;
 }
 
 .slider {
     display: flex;
-    /* this gives animation effect to any movements on the page */
     transition: all 1s ease;
 }
 
 .image {
-    width: 800px;
-    height: 500px;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 
 .bottom {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
+    gap: 15px;
 }
 
 .button {
-    width: 15px;
     height: 15px;
+    width: 15px;
     border-radius: 50%;
     border: 1px solid white;
     cursor: pointer;
+}
+
+.current-button {
+    background-color: white;
 }
